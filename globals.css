@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+/*
+  Palette note: pulled from the dusk-fort reference photo rather than the
+  usual AI-generated cream/terracotta or near-black/acid-green defaults —
+  marigold as the single accent, maroon + dusk-indigo as bandhani-adjacent
+  supporting tones, sandstone for the fort itself.
+*/
+@theme {
+  --color-accent: #e8a33d;
+  --color-accent-soft: #f2c47c;
+  --color-maroon: #6d1f2b;
+  --color-dusk: #22406b;
+  --color-sand: #c98a4b;
+  --color-ink: #14100c;
+
+  --font-body: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-yatra), "Noto Sans Devanagari", cursive;
+}
+
+@layer base {
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: #f5efe6;
+    font-family: var(--font-body);
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+  }
+}
+
+/* Background image lives in CSS (not inline) so the orientation media query can swap it. */
+.hero-bg {
+  background-image: url("/bg/scene-wide.png");
+}
+
+@media (orientation: portrait) {
+  .hero-bg {
+    background-image: url("/bg/scene-tall.png");
+  }
+}
+
+@keyframes vinyl-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
